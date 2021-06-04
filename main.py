@@ -1,5 +1,5 @@
 # Teste de deselvonvimento de sistemas
-# desenvolvindo por William, Lucas Leal, ...
+# desenvolvindo por William, Lucas Leal, Pedro Damazio ...
 
 
 
