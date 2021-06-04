@@ -1,5 +1,5 @@
 # Teste de deselvonvimento de sistemas
-# desenvolvindo por William, ...
+# desenvolvindo por William, Lucas Leal, ...
 
 
 
