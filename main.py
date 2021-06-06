@@ -28,12 +28,21 @@ class mp3():
         self.lbunknow = Label(self.frameLabels, image=self.img_lbunknow)
         self.lbunknow.imagem = self.img_lbunknow
 
-        self.lbnomeartista = Label(self.frameLabels, text='Nome artista', fg='white', bg='black')
+        self.lbnomemusica = Label(self.frameLabels, text='Nome da musica', fg='white', bg='black', font='Coolvetica 20 bold')
+
+        self.lbnomeartista = Label(self.frameLabels, text='nome do artista', fg='white', bg='black', font='Coolvetica 12 bold')
 
         # adicionado labels na janela
+
         self.lbunknow.pack(pady= 10)
-        self.lbnomeartista.pack()
+        self.lbnomemusica.pack(anchor=W)
+        self.lbnomeartista.pack(anchor=NW)
         
+
+
+
+
+
         # -----Buttons--------
 
         # imagens dos botões
@@ -46,19 +55,16 @@ class mp3():
 
 
         # adicionado os botões
-        self.btstart = Button(self.frameButtons, image=self.img_btstart, width=50, bg='black', activebackground='black', relief='flat', command=self.playPausesong)
+        self.btstart = Button(self.frameButtons, image=self.img_btstart, width=50, height=50, bg='black', activebackground='black', relief='flat', command=self.playPausesong)
 
-        self.btpause = Button(self.frameButtons, image=self.img_btpause, width=50, bg='black', activebackground='black', relief='flat', command=self.pausesong)
+        self.btstop = Button(self.frameButtons, image=self.img_btstop, width=20, height=30, bg='black', activebackground='black', relief='flat', command=self.stopsong)
 
-        self.btstop = Button(self.frameButtons, image=self.img_btstop, width=50, bg='black', activebackground='black', relief='flat', command=self.stopsong)
+        self.btreturn = Button(self.frameButtons, image=self.img_btreturn, width=20, height=20, bg='black', activebackground='black', relief='flat')
 
-        self.btreturn = Button(self.frameButtons, image=self.img_btreturn, width=50, bg='black', activebackground='black', relief='flat')
-
-        self.btavanced = Button(self.frameButtons, image=self.img_btavanced, width=50, bg='black', activebackground='black', relief='flat')
+        self.btavanced = Button(self.frameButtons, image=self.img_btavanced, width=20, height=20, bg='black', activebackground='black', relief='flat')
 
     
         self.btstart.imagem = self.img_btstart
-        self.btpause.imagem = self.img_btpause
         self.btstop.imagem = self.img_btstop
         self.btreturn.imagem = self.img_btreturn
         self.btavanced.imagem = self.img_btavanced
@@ -66,14 +72,13 @@ class mp3():
 
         # adicionado os botões no frameButtons
     
-        self.btreturn.pack(side = LEFT, padx=10)
-        self.btstart.pack(side = LEFT, padx=10)
-        # self.btpause.pack(side = LEFT, padx=10)
-        self.btstop.pack(side = LEFT, padx=10) 
-        self.btavanced.pack(side = LEFT, padx=10)
+        self.btreturn.pack(side = LEFT, padx=8)
+        self.btstart.pack(side = LEFT, padx=8)
+        self.btstop.pack(side = LEFT, padx=8) 
+        self.btavanced.pack(side = LEFT, padx=8)
     
         self.v = 1
-
+        self.mixer = mixer
         
     def playPausesong(self):  #  metodo para tocar a musica
        
@@ -84,9 +89,9 @@ class mp3():
             self.img_btstart = PhotoImage(file='imagens/btpause.png')
             self.btstart['image'] = self.img_btpause
 
-            mixer.init()
-            mixer.music.load('musicas\Jovem Dex  Porsche.mp3')
-            mixer.music.play()
+            self.mixer.init()
+            self.mixer.music.load('musicas\Jovem Dex  Porsche.mp3')
+            self.mixer.music.play()
             # event.wait()
 
             self.v = 2
@@ -97,7 +102,7 @@ class mp3():
         elif self.v == 3:
             self.img_btstart = PhotoImage(file='imagens/btpause.png')
             self.btstart['image'] = self.img_btpause
-            mixer.music.unpause()
+            self.mixer.music.unpause()
             self.v = 2
             
      
@@ -108,7 +113,7 @@ class mp3():
 
         self.img_btstart = PhotoImage(file='imagens/btstart.png')
         self.btstart['image'] = self.img_btstart
-        mixer.music.stop()
+        self.mixer.music.stop()
         self.v = 2
         
     
@@ -118,7 +123,7 @@ class mp3():
         #  mudando o botão pause para o botão play
         self.img_btstart = PhotoImage(file='imagens/btstart.png')
         self.btstart['image'] = self.img_btstart
-        mixer.music.pause()
+        self.mixer.music.pause()
         self.v = 3
 
 # Codigo Principal
