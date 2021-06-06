@@ -27,7 +27,7 @@ class mp3():
         #adicionado labels
         self.lbunknow = Label(self.frameLabels, image=self.img_lbunknow)
         self.lbunknow.imagem = self.img_lbunknow
-        
+
         self.lbnomeartista = Label(self.frameLabels, text='Nome artista', fg='white', bg='black')
 
         # adicionado labels na janela
@@ -46,11 +46,11 @@ class mp3():
 
 
         # adicionado os botões
-        self.btstart = Button(self.frameButtons, image=self.img_btstart, width=50, bg='black', activebackground='black', relief='flat')
+        self.btstart = Button(self.frameButtons, image=self.img_btstart, width=50, bg='black', activebackground='black', relief='flat', command=self.playsong)
 
-        self.btpause = Button(self.frameButtons, image=self.img_btpause, width=50, bg='black', activebackground='black', relief='flat')
+        self.btpause = Button(self.frameButtons, image=self.img_btpause, width=50, bg='black', activebackground='black', relief='flat', command=self.pausesong)
 
-        self.btstop = Button(self.frameButtons, image=self.img_btstop, width=50, bg='black', activebackground='black', relief='flat')
+        self.btstop = Button(self.frameButtons, image=self.img_btstop, width=50, bg='black', activebackground='black', relief='flat', command=self.stopsong)
 
         self.btreturn = Button(self.frameButtons, image=self.img_btreturn, width=50, bg='black', activebackground='black', relief='flat')
 
@@ -71,6 +71,18 @@ class mp3():
         self.btpause.pack(side = LEFT, padx=10)
         self.btstop.pack(side = LEFT, padx=10) 
         self.btavanced.pack(side = LEFT, padx=10)
+    
+
+    def playsong(self):  #  metodo para tocar a musica
+        print('Player music')
+    
+
+    def stopsong(self):  #  metodo para parar de tocar a musica
+        print('Stop music')
+    
+
+    def pausesong(self):  #  metodo para pausar a musica
+        print('Pause music')
 
 
 # Codigo Principal
