@@ -18,7 +18,7 @@ pygame É usada para o adicionamento e controle do audio na. aplicação, usando
 </p>
 
 <p> Para á manipulação/edição das imagens são usados os softawares photoshop, canva, GIMP2.
-
+<br>
 <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="python badger">
 <img src="https://img.shields.io/badge/Adobe%20Photoshop-31A8FF?style=for-the-badge&logo=Adobe%20Photoshop&logoColor=black" alt="phtoshop badger">
 <img src="https://img.shields.io/badge/Canva-%2300C4CC.svg?&style=for-the-badge&logo=Canva&logoColor=white" alt="canva badger">
