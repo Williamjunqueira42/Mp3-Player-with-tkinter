@@ -71,19 +71,31 @@ class mp3():
         self.btpause.pack(side = LEFT, padx=10)
         self.btstop.pack(side = LEFT, padx=10) 
         self.btavanced.pack(side = LEFT, padx=10)
-    
+
 
     def playsong(self):  #  metodo para tocar a musica
+         self.v = 1
         print('Player music')
+        if self.v == 0:
+            mixer.music.unpause()
+        else:    
+            mixer.init()
+            mixer.music.load('musicas\Jovem Dex  Porsche.mp3')
+            mixer.music.play()
+            event.wait()
+        
     
 
     def stopsong(self):  #  metodo para parar de tocar a musica
         print('Stop music')
+        mixer.music.stop()
+        
     
 
     def pausesong(self):  #  metodo para pausar a musica
         print('Pause music')
-
+        mixer.music.pause()
+        self.v = 0
 
 # Codigo Principal
 
@@ -93,6 +105,7 @@ mp3(root)
 root.iconbitmap('favicon.ico')
 root.title('Mp3')
 root.geometry('375x667')
+root.resizable(False, False)
 root.configure(background='black')
 root.mainloop()
 
