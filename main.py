@@ -6,61 +6,55 @@
 from tkinter import *
 from pygame import *  #  tem que instalar a blibioteca no seu pc
 
-# Obs vamos usar todas as funçoes com nome em ingles 
+# Obs vamos usar todas as funçoes com nome em ingles
+# nome de metodos em camelCase 
 
 class mp3():
-    def __init__(self, master):
+    def __init__(self, master): 
         self.master = master
+        
+        self.frameButtons = Frame(self.master, bg='black') #  frames de botões
+        self.frameButtons.pack(side=BOTTOM, pady=50)
+
+        # -----Buttons--------
+
+        # imagens dos botões
+        self.img_btstart = PhotoImage(file='imagens/btstart.png')
+        self.img_btpause = PhotoImage(file='imagens/btpause.png')
+        self.img_btstop = PhotoImage(file='imagens/btstop.png')
+        self.img_btreturn = PhotoImage(file='imagens/btreturn.png')
+        self.img_btavanced = PhotoImage(file='imagens/btavanced.png')
+
+
+        # adicionado os botões
+        self.btstart = Button(self.frameButtons, image=self.img_btstart, width=50)
+        self.btpause = Button(self.frameButtons, image=self.img_btpause, width=50)
+        self.btstop = Button(self.frameButtons, image=self.img_btstop, width=50)
+        self.btreturn = Button(self.frameButtons, image=self.img_btreturn, width=50)
+        self.btavanced = Button(self.frameButtons, image=self.img_btavanced, width=50)
+        
+        self.btstart.imagem = self.img_btstart
+        self.btpause.imagem = self.img_btpause
+        self.btstop.imagem = self.img_btstop
+        self.btreturn.imagem = self.img_btreturn
+        self.btavanced.imagem = self.img_btavanced
+
+
+        # adicionado os botões no frameButtons
+        self.btreturn.pack(side = LEFT, padx=10)
+        self.btstart.pack(side = LEFT, padx=10)
+        self.btpause.pack(side = LEFT, padx=10)
+        self.btstop.pack(side = LEFT, padx=10) 
+        self.btavanced.pack(side = LEFT, padx=10)
 
 # Codigo Principal
 
-root =Tk()
+root = Tk()
 mp3(root)
 
 root.iconbitmap('favicon.ico')
 root.title('Mp3')
-root.geometry("300x400")
-root.configure(background="black")
-
-topFrame = Frame(root)
-topFrame.pack()
-
-bottomFrame = Frame(root)
-bottomFrame.pack()
-
-#Botões de start e pause
-
-imgbotao1=PhotoImage(file="icons8-start-50.png")
-btnsalvar1=Button(root,image=imgbotao1,height=50,width=50).place(x=50,y=75)
-
-imgbotao2=PhotoImage(file="icons8-pause-50.png")
-btnsalvar2=Button(root,image=imgbotao2,height=50,width=50).place(x=200,y=75)
-
-#Nome da música e do artista
-
-txt1 = Label(root, text="", bg="white", fg="black")
-txt1.place(x=10, y=10, width=280, height=20)
-
-txt2 = Label(root, text="", bg="white", fg="black")
-txt2.place(x=10, y=40, width=280, height=20)
-
-#Músicas disponiveis 
-
-txt3 = Label(root, text="", bg="white", fg="black")
-txt3.place(x=10, y=240, width=280, height=20)
-
-txt4 = Label(root, text="", bg="white", fg="black")
-txt4.place(x=10, y=270, width=280, height=20)
-
-txt5 = Label(root, text="", bg="white", fg="black")
-txt5.place(x=10, y=300, width=280, height=20)
-
-txt6 = Label(root, text="", bg="white", fg="black")
-txt6.place(x=10, y=330, width=280, height=20)
-
-txt7 = Label(root, text="", bg="white", fg="black")
-txt7.place(x=10, y=360, width=280, height=20)
-
-
+root.geometry('375x667')
+root.configure(background='black')
 root.mainloop()
 
