@@ -46,7 +46,7 @@ class mp3():
 
 
         # adicionado os botões
-        self.btstart = Button(self.frameButtons, image=self.img_btstart, width=50, bg='black', activebackground='black', relief='flat', command=self.playsong)
+        self.btstart = Button(self.frameButtons, image=self.img_btstart, width=50, bg='black', activebackground='black', relief='flat', command=self.playPausesong)
 
         self.btpause = Button(self.frameButtons, image=self.img_btpause, width=50, bg='black', activebackground='black', relief='flat', command=self.pausesong)
 
@@ -68,34 +68,58 @@ class mp3():
     
         self.btreturn.pack(side = LEFT, padx=10)
         self.btstart.pack(side = LEFT, padx=10)
-        self.btpause.pack(side = LEFT, padx=10)
+        # self.btpause.pack(side = LEFT, padx=10)
         self.btstop.pack(side = LEFT, padx=10) 
         self.btavanced.pack(side = LEFT, padx=10)
+    
+        self.v = 1
 
+        
+    def playPausesong(self):  #  metodo para tocar a musica
+       
+        print(self.v)
+        if self.v == 1:
 
-    def playsong(self):  #  metodo para tocar a musica
-         self.v = 1
-        print('Player music')
-        if self.v == 0:
-            mixer.music.unpause()
-        else:    
+            #  mudando o botão play para o botão pause
+            self.img_btstart = PhotoImage(file='imagens/btpause.png')
+            self.btstart['image'] = self.img_btpause
+
             mixer.init()
             mixer.music.load('musicas\Jovem Dex  Porsche.mp3')
             mixer.music.play()
-            event.wait()
+            # event.wait()
+
+            self.v = 2
+
+        elif self.v == 2:
+            self.pausesong()
         
-    
+        elif self.v == 3:
+            self.img_btstart = PhotoImage(file='imagens/btpause.png')
+            self.btstart['image'] = self.img_btpause
+            mixer.music.unpause()
+            self.v = 2
+            
+     
+
 
     def stopsong(self):  #  metodo para parar de tocar a musica
-        print('Stop music')
+      
+
+        self.img_btstart = PhotoImage(file='imagens/btstart.png')
+        self.btstart['image'] = self.img_btstart
         mixer.music.stop()
+        self.v = 2
         
     
 
     def pausesong(self):  #  metodo para pausar a musica
-        print('Pause music')
+
+        #  mudando o botão pause para o botão play
+        self.img_btstart = PhotoImage(file='imagens/btstart.png')
+        self.btstart['image'] = self.img_btstart
         mixer.music.pause()
-        self.v = 0
+        self.v = 3
 
 # Codigo Principal
 
