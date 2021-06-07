@@ -5,6 +5,7 @@
 
 from tkinter import *
 from pygame import *  #  tem que instalar a blibioteca no seu pc
+from eyed3 import *  # para pegar os metadados das musicas, tabem tem que installar
 
 # Obs vamos usar todas as funçoes com nome em ingles
 # nome de metodos em camelCase 
@@ -21,6 +22,11 @@ class mp3():
         
         # -----Labels---------
 
+        self.musicanome = load('musicas\Jovem Dex  Porsche.mp3').tag.title
+        self.artistanome = load('musicas\Jovem Dex  Porsche.mp3').tag.album_artist
+
+
+
         # imagens labels
         self.img_lbunknow = PhotoImage(file='imagens/unknow.png')
 
@@ -28,9 +34,9 @@ class mp3():
         self.lbunknow = Label(self.frameLabels, image=self.img_lbunknow)
         self.lbunknow.imagem = self.img_lbunknow
 
-        self.lbnomemusica = Label(self.frameLabels, text='Nome da musica', fg='white', bg='black', font='Coolvetica 20 bold')
+        self.lbnomemusica = Label(self.frameLabels, text=f'{self.musicanome}', fg='white', bg='black', font='Coolvetica 20 bold')
 
-        self.lbnomeartista = Label(self.frameLabels, text='nome do artista', fg='white', bg='black', font='Coolvetica 12 bold')
+        self.lbnomeartista = Label(self.frameLabels, text=f'{self.artistanome}', fg='white', bg='black', font='Coolvetica 12 bold')
 
         # adicionado labels na janela
 
@@ -131,8 +137,10 @@ class mp3():
 root = Tk()
 mp3(root)
 
-root.iconbitmap('favicon.ico')
-root.title('Mp3')
+root.iconbitmap('favicon100.ico')
+root.title('''                                    
+Music Player
+''')
 root.geometry('375x667')
 root.resizable(False, False)
 root.configure(background='black')
