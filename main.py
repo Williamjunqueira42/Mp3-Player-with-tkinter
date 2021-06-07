@@ -109,7 +109,10 @@ class mp3():
         
     def playPausesong(self):  #  metodo para tocar a musica
         
+        self.indice = self.lista.curselection()
+        self.texto = self.lista.get(self.indice)
         if self.v == 1:
+
             #  mudando o botão play para o botão pause
             self.img_btstart = PhotoImage(file='imagens/btpause.png')
             self.btstart['image'] = self.img_btpause
@@ -128,7 +131,6 @@ class mp3():
             self.mixer.music.unpause()
             self.v = 2
         self.playTime()
-        self.musicanome['text'] = load(self.song).tag.title
 
 
     def stopsong(self):  #  metodo para parar de tocar a musica
@@ -162,6 +164,7 @@ class mp3():
         self.song = filedialog.askopenfilename(initialdir='musicas/', title='escolha algum som', )
 
         self.lista.insert(END, load(self.song).tag.title)
+       
         
 
 # Codigo Principal
