@@ -3,12 +3,15 @@
 
 
 
-from tkinter import *
+from tkinter import * 
 from pygame import *  #  tem que instalar a blibioteca no seu pc
 from eyed3 import *  # para pegar os metadados das musicas, tabem tem que installar
+import tkinter.ttk as ttk
+from time import *
+from mutagen.mp3 import MP3
+from tkinter import filedialog
+ 
 
-# Obs vamos usar todas as funçoes com nome em ingles
-# nome de metodos em camelCase 
 
 class mp3():
     def __init__(self, master): 
@@ -16,35 +19,53 @@ class mp3():
         
         self.frameLabels = Frame(self.master, bg='black')  #  frame dos labels 
         self.frameButtons = Frame(self.master, bg='black') #  frames de botões
-         
-        self.frameButtons.pack(side=BOTTOM, pady=50)
+        self.frameSlide = Frame(self.master, bg='black')
+        self.framelistBox = Frame(self.master, bg='white')
+        
+        self.frameButtons.pack(side=BOTTOM, pady=30)
+        self.frameSlide.pack(side=BOTTOM, anchor=S)
         self.frameLabels.pack(side=BOTTOM, pady=30)
+        self.framelistBox.pack(side = BOTTOM)
+        
+
+        # Menu 
+        
+        self.menu = Menu(self.frameLabels,)
+        self.master.config(menu=self.menu)
+        self.song_menu = Menu(self.menu)
+        self.menu.add_cascade(label="Add songs", menu=self.song_menu)
+        self.song_menu.add_command(label="Add one song", command=self.addsong)
+
+        self.song = ('musicas/⠀.mp3')
         
         # -----Labels---------
 
-        self.musicanome = load('musicas\Jovem Dex  Porsche.mp3').tag.title
-        self.artistanome = load('musicas\Jovem Dex  Porsche.mp3').tag.album_artist
+        self.musicanome = load(self.song).tag.title
+        self.artistanome = load(self.song).tag.album_artist
 
-
-
-        # imagens labels
-        self.img_lbunknow = PhotoImage(file='imagens/unknow.png')
 
         #adicionado labels
-        self.lbunknow = Label(self.frameLabels, image=self.img_lbunknow)
-        self.lbunknow.imagem = self.img_lbunknow
 
+        self.lista = Listbox(self.framelistBox, bg='white', fg='black', width=60, height=20, selectbackground='black')
+        
+
+
+   
         self.lbnomemusica = Label(self.frameLabels, text=f'{self.musicanome}', fg='white', bg='black', font='Coolvetica 20 bold')
 
         self.lbnomeartista = Label(self.frameLabels, text=f'{self.artistanome}', fg='white', bg='black', font='Coolvetica 12 bold')
 
         # adicionado labels na janela
 
-        self.lbunknow.pack(pady= 10)
+
+        self.lista.pack()
         self.lbnomemusica.pack(anchor=W)
-        self.lbnomeartista.pack(anchor=NW)
+        self.lbnomeartista.pack()
         
 
+
+        self.status_bar = Label(self.frameSlide, text='00:00:00', anchor=E, bg='black', fg='white')
+        self.status_bar.pack(fill=X, padx=20)
 
 
 
@@ -87,19 +108,15 @@ class mp3():
         self.mixer = mixer
         
     def playPausesong(self):  #  metodo para tocar a musica
-       
-        print(self.v)
+        
         if self.v == 1:
-
             #  mudando o botão play para o botão pause
             self.img_btstart = PhotoImage(file='imagens/btpause.png')
             self.btstart['image'] = self.img_btpause
 
             self.mixer.init()
-            self.mixer.music.load('musicas\Jovem Dex  Porsche.mp3')
+            self.mixer.music.load(f'{self.song}')
             self.mixer.music.play()
-            # event.wait()
-
             self.v = 2
 
         elif self.v == 2:
@@ -110,18 +127,16 @@ class mp3():
             self.btstart['image'] = self.img_btpause
             self.mixer.music.unpause()
             self.v = 2
-            
-     
+        self.playTime()
+        self.musicanome['text'] = load(self.song).tag.title
 
 
     def stopsong(self):  #  metodo para parar de tocar a musica
-      
-
+    
         self.img_btstart = PhotoImage(file='imagens/btstart.png')
         self.btstart['image'] = self.img_btstart
         self.mixer.music.stop()
-        self.v = 2
-        
+        self.v = 1     
     
 
     def pausesong(self):  #  metodo para pausar a musica
@@ -129,8 +144,25 @@ class mp3():
         #  mudando o botão pause para o botão play
         self.img_btstart = PhotoImage(file='imagens/btstart.png')
         self.btstart['image'] = self.img_btstart
-        self.mixer.music.pause()
+        self.mixer.music.pause()  
         self.v = 3
+    
+
+    def playTime(self):  #  metodo para mostrar o tempo da musica
+        time = mixer.music.get_pos() / 1000
+        self.converted_time = strftime('%H:%M:%S', gmtime(time)) 
+        # So Deus Sabe o que eu fiz ai
+
+        self.status_bar.config(text=self.converted_time)
+        self.status_bar.after(1000, self.playTime)
+
+
+    def addsong(self):
+
+        self.song = filedialog.askopenfilename(initialdir='musicas/', title='escolha algum som', )
+
+        self.lista.insert(END, load(self.song).tag.title)
+        
 
 # Codigo Principal
 
