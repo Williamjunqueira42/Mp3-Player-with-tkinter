@@ -4,7 +4,7 @@
 
 from tkinter import * 
 from pygame import *  #  tem que instalar a blibioteca no seu pc
-from eyed3 import *  # para pegar os metadados das musicas, tabem tem que installar 
+from eyed3 import *  # para pegar os metadados das musicas, tabem tem que installar
 from time import *
 from mutagen.mp3 import MP3
 from tkinter import filedialog
@@ -14,16 +14,20 @@ class mp3():
     def __init__(self, master): 
         self.master = master
         #  criando os frames
-        self.frameLabels = Frame(self.master, bg='black')  #  frame dos labels 
-        self.frameButtons = Frame(self.master, bg='black') #  frames de botões
-        self.frameSlide = Frame(self.master, bg='black')
+        self.frameLabels = Frame(self.master, bg='#532c5e')  #  frame dos labels 
+        self.frameButtons = Frame(self.master, bg='light grey') #  frames de botões
+        self.frameSlide = Frame(self.master, bg='light grey')
         self.framelistBox = Frame(self.master, bg='white')
         
         # posicionando os frames
+        self.framelistBox.pack(side = BOTTOM)
+
         self.frameButtons.pack(side=BOTTOM, pady=30)
         self.frameSlide.pack(side=BOTTOM, anchor=S)
         self.frameLabels.pack(side=BOTTOM, pady=30)
-        self.framelistBox.pack(side = BOTTOM)
+        
+        
+
 
 #--------------------------------------------------------------------------------
 # ----------------------------------MENU------------------------------------------
@@ -35,40 +39,6 @@ class mp3():
         self.song_menu = Menu(self.menu)
         self.menu.add_cascade(label="Add songs", menu=self.song_menu)
         self.song_menu.add_command(label="Add one song", command=self.addsong)
-
-#--------------------------------------------------------------------------------
-
-        self.lista = Listbox(self.framelistBox, bg='white', fg='black', width=60, height=20, selectbackground='black')
-        self.lista.pack()
-
-
-#---------------------------------------------------------------------------------
-#----------------------------------LABELS-----------------------------------------#---------------------------------------------------------------------------------
-        
-         #  variaveis referentes ao nome da musica e nome do cantor
-        self.musicanome = StringVar() 
-        self.artistanome = StringVar()
-        self.musicanome.set('')
-        self.artistanome.set('')
-
-     
-        #adicionado os labels
-
-        self.lbnomemusica = Label(self.frameLabels, textvariable=self.musicanome, fg='white', bg='black', font='Coolvetica 20 bold')
-
-        self.lbnomeartista = Label(self.frameLabels, textvariable=self.artistanome, fg='white', bg='black', font='Coolvetica 12 bold')
-
-        # posicionando os labels
-        
-        self.lbnomemusica.pack(anchor=W)
-        self.lbnomeartista.pack()
-        
-#----------------------------------------------------------------------------
-
-        self.status_bar = Label(self.frameSlide, text='00:00:00', anchor=E, bg='black', fg='white')
-        self.status_bar.pack(fill=X, padx=20)
-
-
 
 #---------------------------------------------------------------------------------
 #----------------------------------BUTTONS----------------------------------------#---------------------------------------------------------------------------------
@@ -84,13 +54,13 @@ class mp3():
 
         # adicionado os botões
 
-        self.btstart = Button(self.frameButtons, image=self.img_btstart, width=50, height=50, bg='black', activebackground='black', relief='flat', command=self.playPausesong)
+        self.btstart = Button(self.frameButtons, image=self.img_btstart, width=50, height=50, bg='light grey', activebackground='black', relief='flat', command=self.playPausesong)
 
-        self.btstop = Button(self.frameButtons, image=self.img_btstop, width=20, height=30, bg='black', activebackground='black', relief='flat', command=self.stopsong)
+        self.btstop = Button(self.frameButtons, image=self.img_btstop, width=20, height=30, bg='light grey', activebackground='black', relief='flat', command=self.stopsong)
 
-        self.btreturn = Button(self.frameButtons, image=self.img_btreturn, width=20, height=20, bg='black', activebackground='black', relief='flat')
+        self.btreturn = Button(self.frameButtons, image=self.img_btreturn, width=20, height=20, bg='light grey', activebackground='black', relief='flat')
 
-        self.btavanced = Button(self.frameButtons, image=self.img_btavanced, width=20, height=20, bg='black', activebackground='black', relief='flat')
+        self.btavanced = Button(self.frameButtons, image=self.img_btavanced, width=20, height=20, bg='light grey', activebackground='black', relief='flat')
 
     
         self.btstart.imagem = self.img_btstart
@@ -105,6 +75,39 @@ class mp3():
         self.btstart.pack(side = LEFT, padx=8)
         self.btstop.pack(side = LEFT, padx=8) 
         self.btavanced.pack(side = LEFT, padx=8)
+
+        self.lista = Listbox(self.framelistBox, bg='black', fg='green', width=60, height=20, selectbackground='black')
+        self.lista.pack()
+
+
+#---------------------------------------------------------------------------------
+#----------------------------------LABELS-----------------------------------------#---------------------------------------------------------------------------------
+        
+         #  variaveis referentes ao nome da musica e nome do cantor
+        self.musicanome = StringVar() 
+        self.artistanome = StringVar()
+        self.musicanome.set('')
+        self.artistanome.set('')
+
+     
+        #adicionado os labels
+
+        self.lbnomemusica = Label(self.frameLabels, textvariable=self.musicanome, fg='white', bg='#532c5e', font='Coolvetica 20 bold')
+        self.lbnomeartista = Label(self.frameLabels, textvariable=self.artistanome, fg='white', bg='#532c5e', font='Coolvetica 12 bold')
+
+        # posicionando os labels
+        
+        self.lbnomemusica.pack(anchor=W)
+        self.lbnomeartista.pack()
+        
+#----------------------------------------------------------------------------
+
+        self.status_bar = Label(self.frameSlide, text='00:00:00', anchor=E, bg='light grey', fg='grey')
+        self.status_bar.pack(fill=X, padx=20)
+
+
+
+
 #---------------------------------------------------------------------------------
         self.v = 1
         self.mixer = mixer
@@ -188,6 +191,7 @@ Music Player
 ''')
 root.geometry('375x667')
 root.resizable(False, False)
-root.configure(background='black')
+root.configure(background='#532c5e')
+
 root.mainloop()
 
