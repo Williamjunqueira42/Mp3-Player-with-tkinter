@@ -32,4 +32,4 @@ pygame É usada para o adicionamento e controle do audio na. aplicação, usando
 
 
 
-Marcelo Isoldi Filho: eu achei esse mp3 bem legal e funcional, que é o que se em tal coisa.
+Marcelo Isoldi Filho: eu achei esse mp3 bem legal e funcional, que é o que se quer em tal aplicativo.
