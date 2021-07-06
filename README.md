@@ -24,5 +24,12 @@ pygame É usada para o adicionamento e controle do audio na. aplicação, usando
 <img src="https://img.shields.io/badge/Canva-%2300C4CC.svg?&style=for-the-badge&logo=Canva&logoColor=white" alt="canva badger">
 <img src="https://img.shields.io/badge/gimp-5C5543?style=for-the-badge&logo=gimp&logoColor=white" alt="GIMP badger">
 
+### Atualização mp3 player
 
--- William, Lucas Santos
+
+<p>A nova versão do mp3 player possui um botão para adicionar musicas para a biblioteca de musicas e um para
+ remover as musicas da biblioteca, e integração com o banco de dados  </p>
+
+
+
+Marcelo Isoldi Filho: eu achei esse mp3 bem legal e funcional, que é o que se em tal coisa.
