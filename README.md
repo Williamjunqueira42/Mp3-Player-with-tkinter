@@ -33,3 +33,5 @@ pygame É usada para o adicionamento e controle do audio na. aplicação, usando
 
 
 Marcelo Isoldi Filho: eu achei esse mp3 bem legal e funcional, que é o que se quer em tal aplicativo.
+
+Pedro Damazio Neves: Eu gostei bastante dessa versão 2.0 do aplicativo, deixou ele mais otimizado.
