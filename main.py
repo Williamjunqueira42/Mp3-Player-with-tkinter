@@ -1,5 +1,5 @@
 ﻿# Teste de deselvonvimento de sistemas
-# desenvolvindo por William, Lucas Leal, Pedro Damazio ...
+# desenvolvindo por William, Lucas Leal, Pedro Damazio, Marcelo Isoldi Filho ...
 
 
 from tkinter import * 
