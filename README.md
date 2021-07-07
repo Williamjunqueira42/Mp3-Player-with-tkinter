@@ -38,6 +38,8 @@ Pedro Damazio Neves: Eu gostei bastante dessa versão 2.0 do aplicativo, deixou 
 
 Lucas dos Santos Leal: Eu gostei muito dessa atualização, o app ficou mais funcional, a qualidade do áudio está melhor, achei muito bom.
 
+Caio Miguel Saturnino Barreto: Adorei, simplesmente maravilhoso.
+
 ## Link do Trello
 
 https://trello.com/b/PxwlUnXz/mp3-player-with-tkinter
