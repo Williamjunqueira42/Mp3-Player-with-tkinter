@@ -36,4 +36,14 @@ Marcelo Isoldi Filho: eu achei esse mp3 bem legal e funcional, que é o que se q
 
 Pedro Damazio Neves: Eu gostei bastante dessa versão 2.0 do aplicativo, deixou ele mais otimizado.
 
+<<<<<<< HEAD
 william junqueira: Gostei do app pois conseguimos pegar musicas de qualquer parte do computador.
+=======
+Lucas dos Santos Leal: Eu gostei muito dessa atualização, o app ficou mais funcional, a qualidade do áudio está melhor, achei muito bom.
+
+Caio Miguel Saturnino Barreto: Adorei, simplesmente maravilhoso.
+
+## Link do Trello
+
+https://trello.com/b/PxwlUnXz/mp3-player-with-tkinter
+>>>>>>> 7e3f764817953ae3caeeeda10941b26a34fc7309
