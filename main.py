@@ -8,6 +8,7 @@ from eyed3 import *  # para pegar os metadados das musicas, tabem tem que instal
 from time import *
 from mutagen.mp3 import MP3
 from tkinter import filedialog
+from mysqlconnect import *
  
 
 class mp3():
@@ -17,13 +18,13 @@ class mp3():
         #  criando os frames
         self.frameLabels = Frame(self.master, bg='black')  #  frame dos labels 
         self.frameButtons = Frame(self.master, bg='black') #  frames de botões
-        self.frameSlide = Frame(self.master, bg='black')
+        self.frameTime = Frame(self.master, bg='black')
         self.framelistBox = Frame(self.master, bg='black')
         
         # posicionando os frames
         
         self.frameButtons.pack(side=BOTTOM, pady=30)
-        self.frameSlide.pack(side=BOTTOM, anchor=S)
+        self.frameTime.pack(side=BOTTOM, anchor=S)
         self.frameLabels.pack(side=BOTTOM, pady=30)
         self.framelistBox.pack(side = BOTTOM)
         
@@ -38,7 +39,8 @@ class mp3():
 
         self.song_menu = Menu(self.menu)
         self.menu.add_cascade(label="Add songs", menu=self.song_menu)
-        self.song_menu.add_command(label="Add one song", command=self.addsong)
+        self.song_menu.add_command(label="Add one song to playlist", command=self.addsong)
+        self.song_menu.add_command(label="Add many songs to playlist", command=self.addmanysongs)
 
 #------------------------------------------------------------------------------------------------------------------------
 #----------------------------------BUTTONS----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -62,7 +64,6 @@ class mp3():
 
         self.btavanced = Button(self.frameButtons, image=self.img_btavanced, width=20, height=20, bg='black', activebackground='black', relief='flat')
 
-    
         self.btstart.imagem = self.img_btstart
         self.btstop.imagem = self.img_btstop
         self.btreturn.imagem = self.img_btreturn
@@ -76,8 +77,8 @@ class mp3():
         self.btstop.pack(side = LEFT, padx=8) 
         self.btavanced.pack(side = LEFT, padx=8)
 
-        self.lista = Listbox(self.framelistBox, bg='black', fg='green', width=60, height=20, selectbackground='black')
-        self.lista.pack()
+        self.song_box = Listbox(self.framelistBox, bg='black', fg='green', width=60, height=20, selectbackground='gray')
+        self.song_box.pack()
 
 
 #---------------------------------------------------------------------------------
@@ -102,10 +103,8 @@ class mp3():
         
 #----------------------------------------------------------------------------
 
-        self.status_bar = Label(self.frameSlide, text='00:00:00', anchor=E, bg='black', fg='grey')
-        self.status_bar.pack(fill=X, padx=20)
-
-
+        self.time_bar = Label(self.frameTime, text='00:00:00', anchor=E, bg='black', fg='grey')
+        self.time_bar.pack(fill=X, padx=20)
 
 
 #---------------------------------------------------------------------------------
@@ -113,8 +112,22 @@ class mp3():
         self.mixer = mixer
         
     def playPausesong(self):  #  metodo para tocar a musica
-
-
+        
+        self.y = ''   
+        for x in self.song:
+            if x == load(self.song).tag.title[0]: break
+            self.y += x
+            
+        self.z = ''  
+        for x in self.song[::-1]: 
+            if x == load(self.song).tag.title[len(load(self.song).tag.title)-1]: break
+            self.z += x
+        self.z = self.z[::-1]
+        
+        self.song = f'{self.y}{self.song_box.get(ACTIVE)}{self.z}'
+        
+    
+      
         self.mixer.init()  #  iniciando mixer pygame
         
         self.musicanome.set(load(self.song).tag.title)
@@ -127,7 +140,7 @@ class mp3():
             self.img_btstart = PhotoImage(file='imagens/btpause.png')
             self.btstart['image'] = self.img_btpause
        
-            self.mixer.music.load(f'{self.song}')
+            self.mixer.music.load(self.song)
             self.mixer.music.play()
             self.v = 2
 
@@ -142,8 +155,6 @@ class mp3():
         
         self.playTime()
 
-
-        
 
     def stopsong(self):  #  metodo para parar de tocar a musica
     
@@ -162,24 +173,34 @@ class mp3():
         self.v = 3
     
 
+        self.time_bar.config(text=self.converted_time)
+        self.time_bar.after(1000, self.playTime)
+
+    
+    def nextSong(self):  #  metodo para passar para o proximo som
+        self.nextone = self.song_box.curselection()
+        print(self.nextone)
+        
+
+    def addsong(self):
+        self.song = filedialog.askopenfilename(initialdir='musicas/', title='escolha algum som', )
+        print(self.song)
+        self.song_box.insert(END, load(self.song).tag.title)
+       
+        
+    def addmanysongs(self): #  Metodo para adicionar mais de um som ao mesmo tempo
+        self.songs = filedialog.askopenfilenames(initialdir='musicas/', title='escolha alguns som', )
+        
+        for song in self.songs:
+            self.song_box.insert(END, load(song).tag.title)
+        self.song = self.songs[0]
+        
+        
     def playTime(self):  #  metodo para mostrar o tempo da musica
         time = mixer.music.get_pos() / 1000
         self.converted_time = strftime('%H:%M:%S', gmtime(time)) 
-        # So Deus Sabe o que eu fiz ai
-
-        self.status_bar.config(text=self.converted_time)
-        self.status_bar.after(1000, self.playTime)
-
-
-    def addsong(self):
-
-        self.song = filedialog.askopenfilename(initialdir='musicas/', title='escolha algum som', )
-
-        self.lista.insert(END, load(self.song).tag.title)
-        self.stopsong()
-       
+              
         
-
 # Codigo Principal
 
 root = Tk()
