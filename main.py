@@ -8,8 +8,19 @@ from eyed3 import *  # para pegar os metadados das musicas, tabem tem que instal
 from time import *
 from mutagen.mp3 import MP3
 from tkinter import filedialog
-from mysqlconnect import *
+import mysql.connector
  
+
+
+class Bd():
+    def __init__(self):
+        
+        cnx = mysql.connector.connect(user='root', password='********', host='127.0.0.1')
+
+        mycursor = cnx.cursor()
+        mycursor.execute("CREATE DATABASE mydatabase")
+        
+
 
 class mp3():
     def __init__(self, master): 
@@ -28,7 +39,6 @@ class mp3():
         self.frameLabels.pack(side=BOTTOM, pady=30)
         self.framelistBox.pack(side = BOTTOM)
         
-        
 
 #--------------------------------------------------------------------------------
 # ----------------------------------MENU------------------------------------------
@@ -40,8 +50,11 @@ class mp3():
         self.song_menu = Menu(self.menu)
         self.menu.add_cascade(label="Add songs", menu=self.song_menu)
         self.song_menu.add_command(label="Add one song to playlist", command=self.addsong)
-        self.song_menu.add_command(label="Add many songs to playlist", command=self.addmanysongs)
-
+        
+        self.menu.add_cascade(label="Remove songs", menu=self.song_menu)
+      
+        
+        
 #------------------------------------------------------------------------------------------------------------------------
 #----------------------------------BUTTONS----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -186,14 +199,6 @@ class mp3():
         self.song = filedialog.askopenfilename(initialdir='musicas/', title='escolha algum som', )
         print(self.song)
         self.song_box.insert(END, load(self.song).tag.title)
-       
-        
-    def addmanysongs(self): #  Metodo para adicionar mais de um som ao mesmo tempo
-        self.songs = filedialog.askopenfilenames(initialdir='musicas/', title='escolha alguns som', )
-        
-        for song in self.songs:
-            self.song_box.insert(END, load(song).tag.title)
-        self.song = self.songs[0]
         
         
     def playTime(self):  #  metodo para mostrar o tempo da musica
