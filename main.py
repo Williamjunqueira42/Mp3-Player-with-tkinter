@@ -4,11 +4,11 @@
 
 from tkinter import * 
 from pygame import *  #  tem que instalar a blibioteca no seu pc
-from eyed3 import *  # para pegar os metadados das musicas, tabem tem que installar
+from eyed3 import *  # para pegar os metadados das musicas, tem que instalar
 from time import *
 from mutagen.mp3 import MP3
 from tkinter import filedialog
-from mysqlconnect import *
+# from mysqlconnect import *
  
 
 class mp3():
@@ -40,7 +40,7 @@ class mp3():
         self.song_menu = Menu(self.menu)
         self.menu.add_cascade(label="Add songs", menu=self.song_menu)
         self.song_menu.add_command(label="Add one song to playlist", command=self.addsong)
-        self.song_menu.add_command(label="Add many songs to playlist", command=self.addmanysongs)
+
 
 #------------------------------------------------------------------------------------------------------------------------
 #----------------------------------BUTTONS----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -124,7 +124,7 @@ class mp3():
             self.z += x
         self.z = self.z[::-1]
         
-        self.song = f'{self.y}{self.song_box.get(ACTIVE)}{self.z}'
+        
         
     
       
@@ -187,14 +187,6 @@ class mp3():
         print(self.song)
         self.song_box.insert(END, load(self.song).tag.title)
        
-        
-    def addmanysongs(self): #  Metodo para adicionar mais de um som ao mesmo tempo
-        self.songs = filedialog.askopenfilenames(initialdir='musicas/', title='escolha alguns som', )
-        
-        for song in self.songs:
-            self.song_box.insert(END, load(song).tag.title)
-        self.song = self.songs[0]
-        
         
     def playTime(self):  #  metodo para mostrar o tempo da musica
         time = mixer.music.get_pos() / 1000
