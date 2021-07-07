@@ -1,0 +1,39 @@
+##desenvolvedores: Marcelo, Willian, Lucas Santos, Caio, Pedro Damazio
+
+CREATE TABLE Música (
+
+Artista CHAR,
+
+Nome da Música CHAR PRIMARY KEY
+
+);
+
+
+CREATE TABLE App (
+
+Nome do app CHAR PRIMARY KEY,
+
+Pula, retrocede a música CHAR,
+Adiciona música e remove CHAR,
+
+Mostra uma lista com as músicas CHAR
+
+);
+
+
+CREATE TABLE Úsuario (
+
+Nome CHAR,
+
+Email CHAR PRIMARY KEY
+
+);
+
+ALTER TABLE App ADD CONSTRAINT FK_App_2
+FOREIGN KEY (
+Pula, retrocede a música CHAR,
+ Adiciona música e remove CHAR,
+ Mostra uma lista com as músicas CHAR,
+ 
+REFERENCES CHAR
+);
